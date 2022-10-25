@@ -1,0 +1,44 @@
+drop database Digital;
+create database Digital;
+use	Digital;
+
+create table Niveis (
+id int,
+nome varchar(25),
+endereco varchar(25),
+produto varchar(25),
+ano_kg float,
+destino varchar(30),
+funcionarios int,
+maquinas int,
+auto int,
+/* usuarios qu edeve sem inserido tem de ter o id nivle 2 para cima    */
+imp_municipal varchar(25),
+imp_estadual varchar(25),
+imp_federal varchar(25),
+taxas varchar(25),
+/* USUARIOS com o nivel 3*/
+agrotoxico varchar(25),
+
+primary key (id)
+);
+
+create table func (
+id_func int,
+nome_comp varchar(25),
+id_perm int,
+funcao varchar(25),
+foto_func varchar(100),
+cod_digital int,
+fotos_digital varchar(100),
+primary key(id_func)
+);
+
+ 
+insert into func values
+(1, "Arthur Siqueira", 2 , "Gestor" , "funcionarios/user1.jfif", 1 , "database/fingerprint1.jpg"),
+(2, "Patrick Gonçalves", 3 , "Analista" , "funcionarios/user2.jfif", 2 , "database/fingerprint2.jpg"),
+(3, "Bruno Galdino", 2 , "Gestor" , "funcionarios/user3.jpg", 3 , "database/fingerprint3.jpg"),
+(4, "Nikolas Alencar", 2 , "Gestor" , "funcionarios/user4.jfif", 4 , "database/fingerprint4.jpg"),
+(5, "Paulo Henrique", 1 , "Estagiario" , "funcionarios/user5.jfif", 5 , "database/fingerprint5.jpg"),
+(6, "Gustavão", 1 , "Estagiario" , "funcionarios/user6.jpg", 1 , "database/fingerprint6.jpg");
