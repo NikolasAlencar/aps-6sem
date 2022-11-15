@@ -49,5 +49,54 @@ def enviarDigital():
     
     return { 'success': False, 'result': compt * 100, 'imagePath': "{}".format(i[6]), 'caminhoUsado': caminho }            
 
+@app.post('/adquire-info')
+def adquireInfo():
+    data = request.data.__str__()
+    nivel = data[11]
+    if nivel=='1':
+        agrotoxicos = adquireAgro()
+        return { 'agrotoxicos': agrotoxicos }
+    elif nivel=='2':
+        agrotoxicos = adquireAgro()
+        regioes = adquireRegioes()
+        return { 'agrotoxicos': agrotoxicos, 'regioes': regioes }
+    elif nivel=='3':
+        agrotoxicos = adquireAgro()
+        regioes = adquireRegioes()
+        proprietarios = adquireProp()
+        return { 'agrotoxicos': agrotoxicos, 'regioes': regioes, 'proprietarios': proprietarios }
+    else:
+        return 'Nível incorreto!'
+
+def adquireAgro():
+    con = mysql.connector.connect(host='localhost',database='Digital',user='nikolau',password='12345678')
+
+    if con.is_connected():
+        cursor = con.cursor()
+        cursor.execute("select * from agrotoxico;")
+        result = cursor.fetchall()
+
+    return { 'conteudo': result}            
+
+def adquireRegioes():
+    con = mysql.connector.connect(host='localhost',database='Digital',user='nikolau',password='12345678')
+
+    if con.is_connected():
+        cursor = con.cursor()
+        cursor.execute("select * from regioes;")
+        result = cursor.fetchall()
+
+    return { 'conteudo': result} 
+
+def adquireProp():
+    con = mysql.connector.connect(host='localhost',database='Digital',user='nikolau',password='12345678')
+
+    if con.is_connected():
+        cursor = con.cursor()
+        cursor.execute("select * from proprietario;")
+        result = cursor.fetchall()
+
+    return { 'conteudo': result} 
+
 if __name__ == '__main__':
     app.run()
